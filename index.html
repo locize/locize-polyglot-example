@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base href="/" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/style.css" />
+
+    <title>locize polyglot demo</title>
+</head>
+
+<body>
+    <div class="languageToggler" translated>
+      <a onClick="changeLanguage('en')">english</a>
+      &nbsp;|&nbsp;
+      <a onClick="changeLanguage('de')">deutsch</a>
+    </div>
+
+    <h1 id="headline" class="headline" ></h1>
+
+    <p id="intro"></p>
+
+    <!-- SECTION ONE -->
+    <a name="section1"></a>
+    <div class="info" translated>
+      <h4>Samples</h4>
+      <p>
+        Below you find content using nesting, interpolation and plurals:
+      </p>
+    </div>
+
+    <div class="center">
+      <h6>Nested value `something.nested`</h6>
+      <p id="nested"></p>
+      <h6>Interpolating `Hello, %{name}.`</h6>
+      <p id="interpolate"></p>
+      <h6>Singular `count 1`</h6>
+      <p id="count1"></p>
+      <h6>Plural `count 10`</h6>
+      <p id="count10"></p>
+    </div>
+
+
+    <!-- demo script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/polyglot.js/2.0.0/polyglot.min.js"></script>
+    <script>
+      // initialize polyglot by settings phrases on server
+      var polyglot = new Polyglot({ phrases: JSON.parse(###locals###), locale: '###lng###' });
+
+      // translate
+      document.getElementById('headline').innerHTML = polyglot.t('title');
+      document.getElementById('intro').innerHTML = polyglot.t('intro');
+
+      // translate features
+      console.warn(document.getElementById('nested'))
+      document.getElementById('nested').innerHTML = polyglot.t('something.nested');
+      document.getElementById('interpolate').innerHTML = polyglot.t('interpolate', { name: 'MrInterpolate' });
+      document.getElementById('count1').innerHTML = polyglot.t('plural', 1);
+      document.getElementById('count10').innerHTML = polyglot.t('plural', 10);
+
+
+      // location change
+      function updateQueryStringParameter(uri, key, value) {
+        var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+        var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+        if (uri.match(re)) {
+          return uri.replace(re, '$1' + key + "=" + value + '$2');
+        }
+        else {
+          return uri + separator + key + "=" + value;
+        }
+      }
+
+      function changeLanguage(lng) {
+        window.location = updateQueryStringParameter(window.location.href, 'lng', lng);
+      }
+    </script>
+</body>
+
+</html>

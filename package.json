@@ -1,0 +1,31 @@
+{
+  "name": "locize-polyglot-example",
+  "version": "0.0.1",
+  "description": "example using polyglot with locize",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/locize/locize-polyglot-example.git"
+  },
+  "keywords": [
+    "locize",
+    "polyglot",
+    "i18n",
+    "l10n"
+  ],
+  "author": "locize",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/locize/locize-polyglot-example/issues"
+  },
+  "homepage": "https://github.com/locize/locize-polyglot-example#readme",
+  "dependencies": {
+    "body-parser": "1.15.2",
+    "express": "4.14.0",
+    "request": "2.73.0"
+  }
+}
